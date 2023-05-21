@@ -30,3 +30,17 @@ Node Version manager (nvm) is the best way to achieve this.
 ```
     http://server/property/{id}
 ```
+# Screenshots
+
+### National view
+
+<img src="example/national.png" alt="National view" title="National" width="50%" height="50%">
+
+### Town (Area) view
+
+<img src="example/town.png" alt="Area view" title="Area" width="50%" height="50%">
+
+
+### Local view
+
+<img src="example/property.png" alt="Property view" title="Property" width="50%" height="50%">

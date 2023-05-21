@@ -1,0 +1,50 @@
+{% from "govuk/components/accordion/macro.njk" import govukAccordion %}
+
+{%  macro cando() %}
+    <h2 class="govuk-heading-l">What you can do</h2>
+    {{ govukAccordion({
+        id: "accordion-default",
+        items: [
+            {
+                heading: {
+                text: "How to prepare for a flood"
+            },
+                content: {
+                html: "<p class='govuk-body'>This is the content.</p>"
+            }
+            },
+            {
+                heading: {
+                text: "What to do in a flood"
+            },
+                content: {
+                html: "<p class='govuk-body'>This is the content.</p>"
+            }
+            },
+            {
+                heading: {
+                text: "Who to contact about flooding"
+            },
+                content: {
+                html: "<p class='govuk-body'>This is the content.</p>"
+            }
+            },
+            {
+                heading: {
+                text: "What is happening in the area"
+            },
+                content: {
+                html: "<p class='govuk-body'>This is the content.</p>"
+            }
+            },
+            {
+                heading: {
+                text: "Help with planning permission"
+            },
+                content: {
+                html: "<p class='govuk-body'>This is the content.</p>"
+            }
+            }
+        ]
+    }) }}
+{% endmacro %}

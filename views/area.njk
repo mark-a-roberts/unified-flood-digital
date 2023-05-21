@@ -1,0 +1,65 @@
+{% extends "home.njk" %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% from "cando.njk" import cando %}
+
+{% block content %}
+    <h1 class="govuk-heading-l">Flood Risk at {{ area }}</h1>
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            {% for p in overview %}
+                <p class="govuk-body">{{ p }}</p>
+            {% endfor %}
+            <div class="defra--background-grey">
+                {{ govukInput({
+                    label: {
+                        text: "Check if you could flood",
+                        classes: "govuk-label--m",
+                        isPageHeading: true
+                    },
+                    hint: {
+                        text: "Enter your postcode for a street level report"
+                    },
+                    classes: "govuk-!-width-one-half",
+                    id: "your-area",
+                    name: "area"
+                }) }}
+
+                {{ govukButton({
+                    text: "Check",
+                    href: "/property/1"
+                }) }}
+            </div>
+        </div>
+        <div class="govuk-grid-column-one-third">
+            <img src="/assets/map.svg" alt="map">
+            {{ govukButton({
+                html: "View flood risk on a map",
+                classes: "govuk-button--secondary",
+                href: "#"
+            }) }}
+        </div>
+    </div>
+
+    <h2 class="govuk-heading-l">Flood forecast for {{ area }}</h2>
+    {% for p in forecast %}
+        <p class="govuk-body">{{ p }}</p>
+    {% endfor %}
+    <div class="defra-grid-row">
+        {% for l in levels %}
+            <div class="defra-grid-row--item govuk-!-padding-4 defra-card">
+                <h3 class="govuk-heading-m govuk-!-font-weight-bold">{{ l.title }}</h3>
+                <p class="govuk-body">{{ l.text }}</p>
+                <p class="govuk-body govuk-!-margin-bottom-0">
+                    <a href="{{ l.href }}" class="govuk-link govuk-!-font-weight-bold">{{ l.link }}</a>
+                </p>
+            </div>
+        {% endfor %}
+        <div class="govuk-grid-column-full">
+        </div>
+    </div>
+
+    {{ cando() }}
+{% endblock %}

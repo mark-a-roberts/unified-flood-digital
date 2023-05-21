@@ -1,0 +1,17 @@
+{
+  "name": "unified-flood-digital",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "npx node-sass --output-style=expanded --output=public/build/stylesheets application.scss"
+  },
+  "dependencies": {
+    "@envage/hapi-govuk-frontend": "^0.2.1",
+    "@hapi/hapi": "^21.3.2",
+    "govuk-frontend": "^4.6.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "node-sass": "^8.0.0"
+  }
+}

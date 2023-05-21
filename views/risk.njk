@@ -1,0 +1,60 @@
+{% macro riskView(level) %}
+    <div class="defra-card govuk-body govuk-!-padding-4 govuk-!-font-weight-bold">
+        {% if (level == 4) %}
+            <span class="ellipse">1</span>
+            <span class="ellipse">2</span>
+            <span class="ellipse">3</span>
+            <span class="ellipse risk-4">4</span>
+            <span>Very high risk of flooding</span>
+            <p>This property is in the top 1% most at risk of flooding in the country.</p>
+        {% elseif (level == 3) %}
+            <span class="ellipse">1</span>
+            <span class="ellipse">2</span>
+            <span class="ellipse risk-3">3</span>
+            <span class="ellipse">4</span>
+            <span>High risk of flooding</span>
+            <p>This property is in the top 10% most at risk of flooding in the country.</p>
+        {% elseif (level == 2) %}
+            <span class="ellipse">1</span>
+            <span class="ellipse risk-2">2</span>
+            <span class="ellipse">3</span>
+            <span class="ellipse">4</span>
+            <span>Some risk of flooding</span>
+            <p>This property is in the top 50% most at risk of flooding in the country.</p>
+        {% else %}
+            <span class="ellipse risk-1">1</span>
+            <span class="ellipse">2</span>
+            <span class="ellipse">3</span>
+            <span class="ellipse">4</span>
+            <span>Low risk of flooding</span>
+            <p>This property is in the bottom 50% most at risk of flooding in the country.</p>
+        {% endif %}
+        <a href="#">How climate change could affect this rating in the future</a>
+    </div>
+{% endmacro %}
+
+{% macro riskView_s(level) %}
+    <div class="govuk-body govuk-!-font-weight-bold">
+        {% if (level == 4) %}
+            <span class="ellipse-s">1</span>
+            <span class="ellipse-s">2</span>
+            <span class="ellipse-s">3</span>
+            <span class="ellipse-s risk-4">4</span>
+        {% elseif (level == 3) %}
+            <span class="ellipse-s">1</span>
+            <span class="ellipse-s">2</span>
+            <span class="ellipse-s risk-3">3</span>
+            <span class="ellipse-s">4</span>
+        {% elseif (level == 2) %}
+            <span class="ellipse-s">1</span>
+            <span class="ellipse-s risk-2">2</span>
+            <span class="ellipse-s">3</span>
+            <span class="ellipse-s">4</span>
+        {% else %}
+            <span class="ellipse-s risk-1">1</span>
+            <span class="ellipse-s">2</span>
+            <span class="ellipse-s">3</span>
+            <span class="ellipse-s">4</span>
+        {% endif %}
+    </div>
+{% endmacro %}

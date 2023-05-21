@@ -1,0 +1,66 @@
+{% from "govuk/components/table/macro.njk" import govukTable %}
+{% macro couldhappen() %}
+    {{ govukTable({
+        caption: "What could happen",
+        captionClasses: "govuk-table__caption--m",
+        firstCellIsHeader: true,
+        head: [
+            {
+                text: "Type of weather"
+            },
+            {
+                text: "Potential to flood"
+            },
+            {
+                text: "How bad it could be"
+            }
+        ],
+        rows: [
+            [
+                {
+                    text: "Average bad weather"
+                },
+                {
+                    text: "Low"
+                },
+                {
+                    text: "Minimal"
+                }
+            ],
+            [
+                {
+                    text: "Named storm"
+                },
+                {
+                    text: "Medium"
+                },
+                {
+                    text: "Bad"
+                }
+            ],
+            [
+                {
+                    text: "Severe storm"
+                },
+                {
+                    text: "High"
+                },
+                {
+                    text: "Really bad"
+                }
+            ],
+            [
+                {
+                    text: "Once in generation event"
+                },
+                {
+                    text: "Very high"
+                },
+                {
+                    text: "Really bad"
+                }
+            ]
+        ]
+    }) }}
+
+{% endmacro %}

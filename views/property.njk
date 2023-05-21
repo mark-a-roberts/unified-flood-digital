@@ -1,0 +1,47 @@
+{% extends "home.njk" %}
+
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "couldhappen.njk" import couldhappen %}
+{% from "cando.njk" import cando %}
+{% from "risk.njk" import riskView,riskView_s %}
+
+{% block content %}
+    <h1 class="govuk-heading-l">Flood Risk at {{ property }}</h1>
+    {% if warning %}
+        {% set html %}
+            <h4 class="govuk-heading-s">
+                There is a flood warning in place for this area
+            </h4>
+            <p class="govuk-warning-text">Flooding is possible here in the next 24 hours</p>
+        {% endset %}
+
+        {{ govukWarningText({
+            html: html,
+            classes: "defra-warning",
+            iconFallbackText: "Warning"
+        }) }}
+    {% endif %}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            {{ riskView(risk.level) }}
+        </div>
+    </div>
+    {% for p in overview %}
+        <p class="govuk-body">{{ p }}</p>
+    {% endfor %}
+    <h2 class="govuk-heading-l">Where flooding could come from</h2>
+    <div class="defra-grid-row">
+        {% for s in sources %}
+            <div class="defra-grid-row--item defra-card govuk-!-padding-4">
+                <h3 class="govuk-heading-m govuk-!-font-weight-bold">{{ s.title }}</h3>
+                {{ riskView_s(s.risk) }}
+                <p class="govuk-body">{{ s.text }}</p>
+            </div>
+        {% endfor %}
+        <div class="govuk-grid-column-full">
+        </div>
+    </div>
+    {{ couldhappen() }}
+    {{ cando() }}
+
+{% endblock %}

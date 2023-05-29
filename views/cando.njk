@@ -1,5 +1,30 @@
 {% from "govuk/components/accordion/macro.njk" import govukAccordion %}
 
+{% set whoToContact %}
+    <p class="govuk-body"><strong>Floodline</strong></p>
+    <p class="govuk-body">
+        Telephone: 0345 988 1188<br>
+        Textphone: 0345 602 6340<br>
+        Open 24 hours a day, 7 days a week<br>
+        <a href="https://gov.uk/call-charges">Find out more about call charges</a>
+    </p>
+{% endset %}
+
+{% set prepare %}
+    <ul class="govuk-list govuk-list--bullet">
+        <li>prepare a bag that includes medicines and insurance documents</li>
+        <li>check flood warnings</li>
+    </ul>
+{% endset %}
+
+{% set act %}
+    <ul class="govuk-list govuk-list--bullet">
+        <li>turn off gas, water and electricity</li>
+        <li>move things upstairs or to safety</li>
+        <li>move family, pets and car to safety</li>
+    </ul>
+{%  endset %}
+
 {%  macro cando() %}
     <h2 class="govuk-heading-l">What you can do</h2>
     {{ govukAccordion({
@@ -10,7 +35,7 @@
                 text: "How to prepare for a flood"
             },
                 content: {
-                html: "<p class='govuk-body'>This is the content.</p>"
+                html: prepare
             }
             },
             {
@@ -18,7 +43,7 @@
                 text: "What to do in a flood"
             },
                 content: {
-                html: "<p class='govuk-body'>This is the content.</p>"
+                html: act
             }
             },
             {
@@ -26,7 +51,7 @@
                 text: "Who to contact about flooding"
             },
                 content: {
-                html: "<p class='govuk-body'>This is the content.</p>"
+                html: whoToContact
             }
             },
             {

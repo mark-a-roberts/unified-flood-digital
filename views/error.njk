@@ -1,0 +1,9 @@
+{% extends "home.njk" %}
+
+{% block content %}
+    <h1 class="govuk-heading-l">Error</h1>
+    <p class="govuk-body">We are unable to handle your request<br>
+        Status: {{ statusCode }}<br>
+        Error: {{ errName }}
+    </p>
+{% endblock %}

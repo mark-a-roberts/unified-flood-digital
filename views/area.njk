@@ -2,7 +2,7 @@
 
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-
+{% from "flood.njk" import contacts, report %}
 {% from "cando.njk" import cando %}
 
 {% block content %}
@@ -61,5 +61,13 @@
         </div>
     </div>
 
-    {{ cando() }}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            {{ cando() }}
+        </div>
+        <div class="govuk-grid-column-one-third">
+            {{ contacts() }}
+            {{ report() }}
+        </div>
+    </div>
 {% endblock %}

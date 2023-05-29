@@ -9,10 +9,22 @@
     <h1 class="govuk-heading-l">Flood Risk at {{ property }}</h1>
     {% if warning %}
         {% set html %}
-            <h4 class="govuk-heading-s">
-                There is a flood warning in place for this area
-            </h4>
-            <p class="govuk-warning-text">Flooding is possible here in the next 24 hours</p>
+            <div>
+                <div>
+                    <img class="defra-flood-heading-image"
+                         src="/assets/images/symbol-flood-alert.svg"
+                         width="46" height="46" alt="Flood alert">
+
+                </div>
+                <div>
+                    <h4 class="govuk-heading-s govuk-tag">
+                        There is a flood warning in place for this area
+                    </h4>
+                    <p class="govuk-warning-text">Flooding is possible here in the next 24 hours</p>
+                </div>
+            </div>
+
+
         {% endset %}
 
         {{ govukWarningText({

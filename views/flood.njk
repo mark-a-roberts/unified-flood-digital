@@ -1,0 +1,37 @@
+{% from "defra/card.njk" import defraCard %}
+
+{% set _contacts %}
+    <h3 class="govuk-heading-m">Who to contact</h3>
+    <p class="govuk-body"><strong>Floodline</strong></p>
+    <p class="govuk-body">
+        Telephone: 0345 988 1188<br>
+        Textphone: 0345 602 6340<br>
+        Open 24 hours a day, 7 days a week<br>
+        <a href="https://gov.uk/call-charges">Find out more about call charges</a>
+    </p>
+    <p class="govuk-body"><strong>Your local flood authority</strong></p>
+
+{% endset %}
+
+{% macro contacts(params) %}
+    {{ defraCard({
+        classes: "govuk-!-margin-bottom-2 govuk-!-padding-2",
+        html: _contacts
+    }) }}
+{% endmacro %}
+
+{% set _report %}
+    <h3 class="govuk-heading-m">Report a flood</h3>
+    <p class="govuk-body">
+        If you are aware of a flood, please report it to the appropriate team.
+        <br>
+        <a href="https://gov.uk/report-flood-cause">Report a flood</a>
+    </p>
+{% endset %}
+
+{% macro report(params) %}
+    {{ defraCard({
+        classes: "govuk-!-margin-bottom-2 govuk-!-padding-2",
+        html: _report
+    }) }}
+{% endmacro %}

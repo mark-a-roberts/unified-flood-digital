@@ -1,0 +1,17 @@
+{% macro defraWarning(params) %}
+    <div class="govuk-warning-text {{- ' ' + params.classes if params.classes }}"
+    {%- for attribute, value in params.attributes %} {{ attribute }}="{{ value }}"{% endfor -%}
+    >
+    {% if params.icon %}
+        <span class="defra-warning-text__icon {{ params.iconClass }}" aria-hidden="true">
+            {{ params.icon | safe }}
+        </span>
+    {% else %}
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+    {% endif %}
+    <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">{{ params.iconFallbackText | default("Warning") }}</span>
+        {{ params.html | safe if params.html else params.text }}
+    </strong>
+    </div>
+{% endmacro %}

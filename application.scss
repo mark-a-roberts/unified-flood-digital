@@ -110,14 +110,42 @@
 
   &-warning {
     border: 2px  solid govuk-colour("red");
-    border-top: 10px solid govuk-colour("red");
     background-color: govuk-colour("light-pink");
     padding: 10px;
     padding-left: 30px;
     margin-bottom: 5px;
 
+    &__border-top {
+      border-top: 10px solid govuk-colour("red");
+    }
+
+    &__border-left {
+      border-left: 10px solid govuk-colour("red");
+    }
+
     & .govuk-warning-text {
       margin-bottom: 5px;
+    }
+
+    &-text__icon {
+      font-family: "GDS Transport", arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-weight: 700;
+      box-sizing: border-box;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      min-width: 35px;
+      min-height: 35px;
+      margin-top: -7px;
+      font-size: 30px;
+      line-height: 29px;
+      text-align: center;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      forced-color-adjust: none;
     }
   }
 }

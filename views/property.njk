@@ -1,6 +1,6 @@
 {% extends "home.njk" %}
 
-{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "defra/warning.njk" import defraWarning %}
 {% from "couldhappen.njk" import couldhappen %}
 {% from "cando.njk" import cando %}
 {% from "risk.njk" import riskView,riskView_s %}
@@ -8,29 +8,22 @@
 {% block content %}
     <h1 class="govuk-heading-l">Flood Risk at {{ property }}</h1>
     {% if warning %}
+        {% set warningIcon %}
+            <img class="defra-flood-heading-image"
+                 src="/assets/images/symbol-flood-alert.svg"
+                 width="46" height="46" alt="Flood alert">
+        {% endset %}
         {% set html %}
-            <div>
-                <div>
-                    <img class="defra-flood-heading-image"
-                         src="/assets/images/symbol-flood-alert.svg"
-                         width="46" height="46" alt="Flood alert">
-
-                </div>
-                <div>
-                    <h4 class="govuk-heading-s govuk-tag">
-                        There is a flood warning in place for this area
-                    </h4>
-                    <p class="govuk-warning-text">Flooding is possible here in the next 24 hours</p>
-                </div>
-            </div>
-
-
+            <h4 class="govuk-heading-s govuk-tag">
+                There is a flood warning in place for this area
+            </h4>
+            <p class="govuk-warning-text">Flooding is possible here in the next 24 hours</p>
         {% endset %}
 
-        {{ govukWarningText({
+        {{ defraWarning({
+            icon: warningIcon,
             html: html,
-            classes: "defra-warning",
-            iconFallbackText: "Warning"
+            classes: "defra-warning defra-warning__border-top"
         }) }}
     {% endif %}
     <div class="govuk-grid-row">

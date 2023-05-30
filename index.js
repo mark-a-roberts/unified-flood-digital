@@ -8,6 +8,7 @@ const routes = require('./routes');
 
 const env = require( './server/api/floodApi.js');
 const metOffice = require( './server/api/fgs.js');
+const postcode = require( './server/api/postcode.js');
 
 let floodAreas = {}
 

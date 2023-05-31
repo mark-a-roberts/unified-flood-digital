@@ -1,4 +1,5 @@
-const postcodeAPI = require('../server/api/postcode.js');
+const postcodeAPI = require('../server/api/postcode');
+const fgsAPI = require('../server/api/fgs');
 
 const toCaps = (sentence) => {
   const words = sentence.split(" ");
@@ -13,21 +14,53 @@ const routes = [
   {
     method: ['GET'],
     path: '/',
-    handler: (request, h) => {
+    handler: async (request, h) => {
+      // get FGS latest
+      const fgs = await fgsAPI.statement('latest');
+
+      console.log(fgs)
+
+      const forecast = fgs?.statement?.public_forecast
+
+      const summary = forecast?.england_forecast || 'No forecast is available for England.'
+      const ts = new Date( forecast?.published_at);
+      const tsOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      };
       // get data here
       const results = {
         area: 'England',
         overview: [
-          'Overview'
         ],
         forecast: [
-          'Currently the chance of flooding in the next 5 days is low,' +
-          'not much rain has fallen in the past 24 hours but river levels are higher than average.'
+          '<p class="govuk-body">' + summary + '</p>',
+          '<hr>',
+          '<i>Updated at ' + ts.toLocaleString(undefined, tsOptions) + '</i>'
+
         ]
       }
       return h.view('national', {
         pageHeading: 'Flooding in ' + results.area,
         pageText: 'National page',
+        ...results
+      })
+    }
+  },
+
+  // area
+  {
+    method: ['POST'],
+    path: '/area',
+    handler:  (request, h) => {
+      const results = {};
+      return h.view('home', {
+        pageHeading: 'Area',
+        pageText: 'Area text',
         ...results
       })
     }

@@ -1,41 +1,43 @@
-const fetch = require("node-fetch");
-const { apiGet } = require( './api')
+const { apiGet } = require('./api')
 
 const apiRoot = "http://environment.data.gov.uk/flood-monitoring";
 
+/**
+ * flood monitoring areas
+ * @param params
+ * @returns {Promise<*>}
+ */
 const floodAreas = (params = null) => {
-  const result = apiGet( apiRoot, '/id/floodAreas', params)
-  return result;
+  return apiGet(apiRoot, '/id/floodAreas', params)
 }
 
-const floods = (params  = null) => {
-  const result = apiGet( apiRoot, '/id/floods', params)
-  return result;
+/**
+ * flood warnings
+ * @param params
+ * @returns {Promise<*>}
+ */
+const floods = (params = null) => {
+  return apiGet(apiRoot, '/id/floods', params)
 }
 
-const stations = (params  = null) => {
-  const result = apiGet( apiRoot, '/id/stations', params)
-  return result;
+const stations = (params = null) => {
+  return apiGet(apiRoot, '/id/stations', params)
 }
 
-const measures = (params  = null) => {
-  const result = apiGet( apiRoot, '/id/measures', params)
-  return result;
+const measures = (params = null) => {
+  return apiGet(apiRoot, '/id/measures', params)
 }
 
-const readings = (params  = null) => {
-  const result = apiGet( apiRoot, '/data/readings', params)
-  return result;
+const readings = (params = null) => {
+  return apiGet(apiRoot, '/data/readings', params)
 }
 
-const measuresFromStation = (stationId, params  = null) => {
-  const result = apiGet( apiRoot, '/id/stations/' + stationId + '/id/measures', params)
-  return result;
+const measuresFromStation = (stationId, params = null) => {
+  return apiGet(apiRoot, '/id/stations/' + stationId + '/id/measures', params)
 }
 
-const readingsFromStation = (stationId, params  = null) => {
-  const result = apiGet( apiRoot, '/id/stations/' + stationId + '/id/readings', params)
-  return result;
+const readingsFromStation = (stationId, params = null) => {
+  return apiGet(apiRoot, '/id/stations/' + stationId + '/id/readings', params)
 }
 
 module.exports = {

@@ -3,6 +3,8 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% from "flood.njk" import contacts, report %}
+
 {% from "cando.njk" import cando %}
 
 {% block content %}
@@ -11,33 +13,39 @@
         <p class="govuk-body">{{ p }}</p>
     {% endfor %}
 
-    {{ govukInput({
-        label: {
-            text: "Your area",
-            classes: "govuk-label--l",
-            isPageHeading: true
-        },
-        hint: {
-            text: "Get an overview of flooding in your area"
-        },
-        classes: "govuk-!-width-one-half",
-        id: "your-area",
-        name: "area"
-    }) }}
-
-    {{ govukButton({
-        text: "Check",
-        href: "/town/1"
-    }) }}
-    <h2 class="govuk-heading-m">Flood forecast for {{ area }}</h2>
-    {% for p in forecast %}
-        <p class="govuk-body">{{ p }}</p>
-    {% endfor %}
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
+
+            <form method="post" action="/area">
+                {{ govukInput({
+                    label: {
+                        text: "Find out about flooding in your area",
+                        classes: "govuk-label--l",
+                        isPageHeading: true
+                    },
+                    hint: {
+                        text: "Put in your town or postcode"
+                    },
+                    classes: "govuk-!-width-one-half",
+                    id: "your-area",
+                    name: "area"
+                }) }}
+
+                {{ govukButton({
+                    text: "Find out"
+                }) }}
+            </form>
+
+            <h2 class="govuk-heading-m">Flood forecast for {{ area }}</h2>
+            {% for p in forecast %}
+                <p class="govuk-body">{{ p | safe }}</p>
+            {% endfor %}
+
             {{ cando() }}
         </div>
         <div class="govuk-grid-column-one-third">
+            {{ contacts() }}
+            {{ report() }}
         </div>
     </div>
 {% endblock %}

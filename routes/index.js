@@ -1,5 +1,13 @@
 const postcodeAPI = require('../server/api/postcode.js');
 
+const toCaps = (sentence) => {
+  const words = sentence.split(" ");
+
+  return words.map((word) => {
+    return word[0].toUpperCase() + word.substring(1);
+  }).join(" ");
+}
+
 const routes = [
   // national page
   {
@@ -30,14 +38,14 @@ const routes = [
     path: '/town/{id}',
     handler:  (request, h) => {
 
+      const area = toCaps( request.params.id.replace('.', ' '));
 
-      // map id to area here... request.params.id
       const results = {
-        area: 'Hebden Bridge',
+        area,
         overview: [
-          'Hebden Bridge is an area that has a high risk of flooding in many places.',
+          area + ' is an area that has a high risk of flooding in many places.',
           '27 flood warnings have been issued here in the past 10 years. There have also been 2 severe flood warnings. Get flood warnings by phone, text or email.',
-          'There are places in Hebden Bridge that have a high chance of localised flash flooding during heavy rain.',
+          'There are places in ' + area + ' that have a high chance of localised flash flooding during heavy rain.',
           'Climate change will mean that flooding happens more often'
         ],
         forecast: [
@@ -51,7 +59,7 @@ const routes = [
             href: '#'
           },
           {
-            title: "Rainfail levels",
+            title: "Rainfall levels",
             text: "The rainfall in the area has been slightly higher than normal in the past 24hr",
             link: 'View rainfall levels',
             href: '#'
@@ -71,7 +79,7 @@ const routes = [
     handler: async (request, h) => {
       // get postcode details
       // convert - to space
-      const postcode = request.params.id.replace('-', ' ');
+      const postcode = request.params.id.replace('.', ' ');
       console.log(  request.params.id, ' => ', postcode);
 
       const postCodeResult = await postcodeAPI.postcode(postcode);
@@ -130,15 +138,17 @@ const routes = [
     path: '/property/{id}',
     handler: (request, h) => {
       // map id to area here... request.params.id
+      const area = toCaps( request.params.id.replace('.', ' '));
+
       const results = {
         warning: { active: true },
         risk: { level: 4 },
-        property: '2, Generic Road, Hebden Bridge, HX7 6GN',
-        area: 'Hebden Bridge',
+        property: [ '2, Generic Road', area, 'HX7 6GN'].join(', '),
+        area,
         overview: [
-          'Hebden Bridge is an area that has a high risk of flooding in many places.',
+          area + ' is an area that has a high risk of flooding in many places.',
           '27 flood warnings have been issued here in the past 10 years. There have also been 2 severe flood warnings. Get flood warnings by phone, text or email.',
-          'There are places in Hebden Bridge that have a high chance of localised flash flooding during heavy rain.',
+          'There are places in ' + area + ' that have a high chance of localised flash flooding during heavy rain.',
           'Climate change will mean that flooding happens more often'
         ],
         sources: [

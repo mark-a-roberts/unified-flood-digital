@@ -23,22 +23,25 @@ Node Version manager (nvm) is the best way to achieve this.
 
 ```
     http://server/town/{id}
+    http://server/town/hebden.bridge
 ```
 
 ### Local flood information
 
+Note that spaces are replaced by dots
+
 #### By property
 ```
     http://server/property/{id}
+    http://server/property/hebden.bridge
 ```
 
 #### By postcode
 
-Note that spaces are replaced by dashes
 
 ```
     http://server/postcode/{postcode}
-    http://server/postcode/CV1-1AA
+    http://server/postcode/CV1.1AA
 ```
 # Screenshots
 

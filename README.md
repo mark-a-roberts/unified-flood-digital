@@ -14,21 +14,31 @@ Node Version manager (nvm) is the best way to achieve this.
 
 # Valid routes
 
-1. National flood information
+### National flood information
 ```
     http://server
 ```
 
-2. Area flood information
+### Area flood information
 
 ```
     http://server/town/{id}
 ```
 
-3. Local flood information
+### Local flood information
 
+#### By property
 ```
     http://server/property/{id}
+```
+
+#### By postcode
+
+Note that spaces are replaced by dashes
+
+```
+    http://server/postcode/{postcode}
+    http://server/postcode/CV1-1AA
 ```
 # Screenshots
 

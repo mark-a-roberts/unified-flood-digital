@@ -1,0 +1,99 @@
+{% from "govuk/components/tabs/macro.njk" import govukTabs %}
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% macro _rows( rows) %}
+    {% for r in rows %}
+        [
+        {
+        text: {{ r.station }}
+        },
+        {
+        text: {{ r.height }}
+        },
+        {
+        text: {{ r.trend }}
+        },
+        {
+        text: {{ r.state }}
+        }
+        ]
+    {% endfor %}
+{% endmacro %}
+
+{% macro _floodTable(rows) %}
+    {{ govukTable({
+        head: [
+            {
+                text: "Measuring Station"
+            },
+            {
+                text: "Height"
+            },
+            {
+                text: "Trend"
+            },
+            {
+                text: "State"
+            }
+        ],
+        rows: [
+        ]
+    }) }}
+{% endmacro %}
+{% macro levels( river, sea, rainfall, groundwater ) %}
+
+    {% set riverHtml %}
+        <h2 class="govuk-heading-l">River</h2>
+        {{ _floodTable(river) }}
+    {% endset %}
+
+    {% set seaHtml %}
+        <h2 class="govuk-heading-l">Sea</h2>
+        {{ _floodTable(sea) }}
+    {% endset %}
+
+    {% set rainfallHtml %}
+        <h2 class="govuk-heading-l">Rainfall</h2>
+        {{ _floodTable(rainfall) }}
+    {% endset %}
+
+    {% set groundwaterHtml %}
+        <h2 class="govuk-heading-l">Groundwater</h2>
+        {{ _floodTable(groundwater) }}
+    {% endset %}
+
+    <h1>River and rainfall levels</h1>
+
+    {{ govukTabs({
+        items: [
+            {
+                label: "River",
+                id: "river",
+                panel: {
+                html: riverHtml
+            }
+            },
+            {
+                label: "Sea",
+                id: "sea",
+                panel: {
+                html: seaHtml
+            }
+            },
+            {
+                label: "Rainfall",
+                id: "rainfall",
+                panel: {
+                html: rainfallHtml
+            }
+            },
+            {
+                label: "Groundwater",
+                id: "groundwater",
+                panel: {
+                html: groundwaterHtml
+            }
+            }
+        ]
+    }) }}
+{% endmacro %}

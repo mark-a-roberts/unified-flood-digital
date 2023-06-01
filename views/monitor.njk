@@ -2,11 +2,12 @@
 
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "levels.njk" import levels %}
 {% from "flood.njk" import contacts, report %}
 {% from "cando.njk" import cando %}
 
 {% block content %}
-    <h1 class="govuk-heading-l">Flood Risk at {{ area }}</h1>
+    <h1 class="govuk-heading-l">Monitor Flood Risks at {{ area }}</h1>
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             {% for p in overview %}
@@ -49,16 +50,8 @@
         <p class="govuk-body">{{ p }}</p>
     {% endfor %}
     <div class="defra-grid-row">
-        {% for l in levels %}
-            <div class="defra-grid-row--item govuk-!-padding-4 defra-card">
-                <h3 class="govuk-heading-m govuk-!-font-weight-bold">{{ l.title }}</h3>
-                <p class="govuk-body">{{ l.text }}</p>
-                <p class="govuk-body govuk-!-margin-bottom-0">
-                    <a href="{{ l.href }}" class="govuk-link govuk-!-font-weight-bold">{{ l.link }}</a>
-                </p>
-            </div>
-        {% endfor %}
         <div class="govuk-grid-column-full">
+            {{ levels( [], [], [],[]) }}
         </div>
     </div>
 

@@ -57,18 +57,15 @@ const routes = [
     method: ['POST'],
     path: '/area',
     handler:  (request, h) => {
-      const results = {};
-      return h.view('home', {
-        pageHeading: 'Area',
-        pageText: 'Area text',
-        ...results
-      })
+      const payload = request.payload;
+      const id = payload.area.replace(' ', '.');
+      return h.redirect('/postcode/'+id);
     }
   },
   // area level
   {
     method: ['GET'],
-    path: '/town/{id}',
+    path: '/area/{id}',
     handler:  (request, h) => {
 
       const area = toCaps( request.params.id.replace('.', ' '));
@@ -106,6 +103,47 @@ const routes = [
       })
     }
   },
+  // monitor level
+  {
+    method: ['GET'],
+    path: '/monitor/{id}',
+    handler:  (request, h) => {
+
+      const area = toCaps( request.params.id.replace('.', ' '));
+
+      const results = {
+        area,
+        overview: [
+          area + ' is an area that has a high risk of flooding in many places.',
+          '27 flood warnings have been issued here in the past 10 years. There have also been 2 severe flood warnings. Get flood warnings by phone, text or email.',
+          'There are places in ' + area + ' that have a high chance of localised flash flooding during heavy rain.',
+          'Climate change will mean that flooding happens more often'
+        ],
+        forecast: [
+          'Flooding is possible in the next 24 hours. There is a flood warning in place for this area.'
+        ],
+        levels: [
+          {
+            title: "River levels",
+            text: "The rivers in the area are normal and steady",
+            link: 'View river levels',
+            href: '#'
+          },
+          {
+            title: "Rainfall levels",
+            text: "The rainfall in the area has been slightly higher than normal in the past 24hr",
+            link: 'View rainfall levels',
+            href: '#'
+          },
+        ]
+      }
+      return h.view('monitor', {
+        pageHeading: 'Monitor Flood Situation in ' + results.area,
+        pageText: 'Town page',
+        ...results
+      })
+    }
+  },
   {
     method: ['GET'],
     path: '/postcode/{id}',
@@ -127,7 +165,8 @@ const routes = [
           .code(404);
       }
       const details = postCodeResult.result;
-      const area = details.admin_ward;
+      const area = (details.parish && !/unparished/.test(details.parish)) ?
+              details.parish : details.admin_ward;
 
       // map id to area here... request.params.id
       const results = {

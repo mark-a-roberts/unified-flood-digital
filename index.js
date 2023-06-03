@@ -1,92 +1,13 @@
-const hapi = require('@hapi/hapi')
-const server = hapi.server({
-  host: 'localhost',
-  port: 3000
-})
+const createServer = require('./server')
+const pkg = require('./package.json')
 
-const routes = require('./routes');
-
-const env = require( './server/api/floodApi.js');
-const metOffice = require( './server/api/fgs.js');
-const postcode = require( './server/api/postcode.js');
-
-let floodAreas = {}
-
-let floods = {};
-
-
-/**
- * get update from API periodically
- * @returns {Promise<void>}
- */
-const floodUpdate = async() => {
-  const result = await env.floods();
-  if (result) {
-    floods = result;
-  }
-}
-
-const apiStart = async () => {
-  const result = await env.floodAreas();
-  if (result) {
-    floodAreas = result;
-  }
-
-  await floodUpdate();
-
-}
-
-
-
-async function start() {
-  await server.register([{
-    plugin: require('@envage/hapi-govuk-frontend'),
-    options: {
-      analyticsAccount: 'UA-123456789-0',
-      assetPath: '/assets',
-      assetDirectories: ['public/static', 'public/build'],
-      serviceName: 'Unified Flood',
-      viewPath: 'views',
-      includePaths: [
-        // folders where partial views and macros can be found
-        // if this is not specified (not recommended) an attempt will be made crawling the node_modules to find the paths
-        'node_modules/govuk-frontend'
-        // 'node_modules/@ministryofjustice/frontend'
-      ],
-      options: {
-        tags: ['asset']
-      },
-      context: {
-        data: 'some data'
-      }
-    }
-  }])
-
-  await server.ext('onPreResponse', (request, reply) => {
-
-    if (request.response.isBoom) {
-      const err = request.response;
-      const errName = err.output.payload.error;
-      const statusCode = err.output.payload.statusCode;
-
-      return reply.view('error', {
-        statusCode: statusCode,
-        errName: errName
-      })
-        .code(statusCode);
-    }
-
-    return reply.continue;
-  });
-
-  await server.route(routes);
-
-  await server.start()
-  console.log('Server started at: ' + server.info.uri);
-
-}
-
-apiStart();
-
-start()
+createServer()
+  .then((server) => {
+    server.start()
+    console.log('flood-app (%s) running on %s', pkg.version, server.info.uri)
+  })
+  .catch(err => {
+    console.log(err)
+    process.exit(1)
+  })
 

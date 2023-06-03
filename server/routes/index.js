@@ -1,5 +1,5 @@
-const postcodeAPI = require('../server/api/postcode');
-const fgsAPI = require('../server/api/fgs');
+const postcodeAPI = require('../api/postcode');
+const fgsAPI = require('../api/fgs');
 
 const toCaps = (sentence) => {
   const words = sentence.split(" ");

@@ -1,26 +1,32 @@
 {% from "govuk/components/tabs/macro.njk" import govukTabs %}
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
-{% macro _rows( rows) %}
-    {% for r in rows %}
-        [
+{% macro _row( r) %}
+    [
         {
-        text: {{ r.station }}
+        text: r.station
         },
         {
-        text: {{ r.height }}
+        text: r.height
         },
         {
-        text: {{ r.trend }}
+        text: r.trend
         },
         {
-        text: {{ r.state }}
+        text: r.state
         }
-        ]
+    ]
+{% endmacro %}
+
+{% macro _rows( data) %}
+    {% for r in data %}
+        {{ _row( r) }}
+        {% if not loop.last %},{% endif %}
     {% endfor %}
 {% endmacro %}
 
-{% macro _floodTable(rows) %}
+{% macro _floodTable(data) %}
+
     {{ govukTable({
         head: [
             {
@@ -36,33 +42,33 @@
                 text: "State"
             }
         ],
-        rows: [
-        ]
+        rows: [ _rows(data)  ]
     }) }}
 {% endmacro %}
+
 {% macro levels( river, sea, rainfall, groundwater ) %}
 
     {% set riverHtml %}
-        <h2 class="govuk-heading-l">River</h2>
+        <h2 class="govuk-heading-m">River</h2>
         {{ _floodTable(river) }}
     {% endset %}
 
     {% set seaHtml %}
-        <h2 class="govuk-heading-l">Sea</h2>
+        <h2 class="govuk-heading-m">Sea</h2>
         {{ _floodTable(sea) }}
     {% endset %}
 
     {% set rainfallHtml %}
-        <h2 class="govuk-heading-l">Rainfall</h2>
+        <h2 class="govuk-heading-m">Rainfall</h2>
         {{ _floodTable(rainfall) }}
     {% endset %}
 
     {% set groundwaterHtml %}
-        <h2 class="govuk-heading-l">Groundwater</h2>
+        <h2 class="govuk-heading-m">Groundwater</h2>
         {{ _floodTable(groundwater) }}
     {% endset %}
 
-    <h1>River and rainfall levels</h1>
+    <h1 class="govuk-heading-m">Water levels</h1>
 
     {{ govukTabs({
         items: [
@@ -77,21 +83,21 @@
                 label: "Sea",
                 id: "sea",
                 panel: {
-                html: seaHtml
+                html: ""
             }
             },
             {
                 label: "Rainfall",
                 id: "rainfall",
                 panel: {
-                html: rainfallHtml
+                html: ""
             }
             },
             {
                 label: "Groundwater",
                 id: "groundwater",
                 panel: {
-                html: groundwaterHtml
+                html: ""
             }
             }
         ]

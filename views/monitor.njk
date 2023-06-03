@@ -49,9 +49,14 @@
     {% for p in forecast %}
         <p class="govuk-body">{{ p }}</p>
     {% endfor %}
-    <div class="defra-grid-row">
+    <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
-            {{ levels( [], [], [],[]) }}
+            {{ levels(
+                [{station:"River1", height: 1, trend:2, state:3} ],
+                [],
+                [],
+                [])
+            }}
         </div>
     </div>
 

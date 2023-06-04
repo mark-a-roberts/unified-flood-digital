@@ -1,5 +1,10 @@
 @import "node_modules/@envage/hapi-govuk-frontend/application.scss";
 
+@import "tools/mixins";
+
+@import "components/_navbar";
+@import "components/levels-table";
+
 @mixin ellipse {
   background-color: govuk-colour("mid-grey");
   border-radius: 50%;

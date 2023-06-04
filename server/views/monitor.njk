@@ -2,7 +2,6 @@
 
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-{% from "levels.njk" import levels %}
 {% from "flood.njk" import contacts, report %}
 {% from "cando.njk" import cando %}
 
@@ -49,16 +48,14 @@
     {% for p in forecast %}
         <p class="govuk-body">{{ p }}</p>
     {% endfor %}
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-full">
-            {{ levels(
-                [{station:"River1", height: 1, trend:2, state:3} ],
-                [],
-                [],
-                [])
-            }}
-        </div>
-    </div>
+
+    {%  if not model or not model.q %}
+        {% include "partials/levels-none.njk" %}
+    {% elseif model.stations | length and not model.rivers | length or model.isEngland === false and not model.rivers  %}
+        {% include "partials/levels-none.njk" %}
+    {% else %}
+        {% include "partials/levels.njk" %}
+    {% endif %}
 
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
